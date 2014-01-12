@@ -7,7 +7,7 @@
                       [enlive "1.1.4"]]
        :plugins [[com.cemerick/clojurescript.test "0.2.1"]
                  [com.cemerick/austin "0.1.3"]
-                 [com.keminglabs/cljx "0.3.0"]]
+                 [com.keminglabs/cljx "0.3.2"]]
        :cljx {:builds [{:source-paths ["test/cljx"]
                         :output-path "target/test/clj"
                         :rules :clj}
@@ -29,7 +29,7 @@
  :simple {:clean-targets ["out"]
           :test-paths ["target/test/clj" "target/test/cljs"]
           :plugins [[com.cemerick/clojurescript.test "0.2.1"]
-                    [com.keminglabs/cljx "0.3.0"]]
+                    [com.keminglabs/cljx "0.3.2"]]
           :cljx {:builds [{:source-paths ["test/cljx"]
                            :output-path "target/test/clj"
                            :rules :clj}
@@ -46,7 +46,7 @@
  :advanced {:clean-targets ["out"]
             :test-paths ["target/test/clj" "target/test/cljs"]
             :plugins [[com.cemerick/clojurescript.test "0.2.1"]
-                      [com.keminglabs/cljx "0.3.0"]]
+                      [com.keminglabs/cljx "0.3.2"]]
             :cljx {:builds [{:source-paths ["test/cljx"]
                              :output-path "target/test/clj"
                              :rules :clj}
