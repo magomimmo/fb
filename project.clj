@@ -7,12 +7,13 @@
   :min-lein-version "2.3.4"
   :source-paths ["src/clj" "src/cljs"]
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2127"]]
+                 [org.clojure/clojurescript "0.0-2138"]]
   :plugins [[lein-cljsbuild "1.0.1"]]
   :hooks [leiningen.cljsbuild]
   :cljsbuild
   {:crossovers [com.sinapsi.fb.controllers.pid
                 com.sinapsi.fb.controllers.advanced-pid
+                com.sinapsi.fb.controllers.deadband
                 com.sinapsi.fb.protocols]
    :builds {:fb
             {:source-paths ["src/cljs"]
