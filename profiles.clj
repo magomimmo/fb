@@ -15,33 +15,48 @@
                         :output-path "target/test/cljs"
                         :rules :cljs}]}
        :cljsbuild
-       {:builds {:whitespace
-                 {:source-paths ["src/cljs" "target/test/cljs" "dev-resources/tools/repl"]
+       {:builds {:fb
+                 {:source-paths ["target/test/cljs" "dev-resources/tools/repl"]
                   :compiler
-                  {:output-to "dev-resources/public/js/fb.js"
-                   :output-dir "dev-resources/public/js"
-                   :source-map "dev-resources/public/js/fb.js.map"
-                   :optimizations :whitespace
-                   :pretty-print true}}
-                 #_{:source-paths ["src/cljs" "target/test/cljs"]
-                  :compiler
-                  {:output-to "dev-resources/public/js/simple.js"
-                   :optimizations :simple
-                   :pretty-print false}}
-                 #_{:source-paths ["src/cljs" "target/test/cljs"]
-                  :compiler
-                  {:output-to "dev-resources/public/js/advanced.js"
-                   :optimizations :advanced
-                   :pretty-print false}}}
-        :test-commands {"phantomjs-ws"
-                        ["phantomjs" :runner "dev-resources/public/js/fb.js"]
-                        ;"phantomjs-simple"
-                        #_["phantomjs" :runner "dev-resources/public/js/simple.js"]
-                        ;"phantomjs-advanced"
-                        #_["phantomjs" :runner "dev-resources/public/js/advanced.js"]}}
-
+                  {:optimizations :whitespace
+                   :pretty-print true}}}
+        :test-commands {"phantomjs" ["phantomjs" :runner "dev-resources/public/js/fb.js"]}}
        :injections [(require '[ring.server :as http :refer [run-server]]
                              'cemerick.austin.repls)
                     (defn browser-repl []
                       (cemerick.austin.repls/cljs-repl (reset! cemerick.austin.repls/browser-repl-env
-                                                               (cemerick.austin/repl-env))))]}}
+                                                               (cemerick.austin/repl-env))))]}
+ :simple {:clean-targets ["out"]
+          :test-paths ["target/test/clj" "target/test/cljs"]
+          :plugins [[com.cemerick/clojurescript.test "0.2.1"]
+                    [com.keminglabs/cljx "0.3.0"]]
+          :cljx {:builds [{:source-paths ["test/cljx"]
+                           :output-path "target/test/clj"
+                           :rules :clj}
+                          {:source-paths ["test/cljx"]
+                           :output-path "target/test/cljs"
+                           :rules :cljs}]}
+          :cljsbuild
+          {:builds {:fb
+                    {:source-paths ["target/test/cljs"]
+                     :compiler
+                     {:optimizations :simple}}}
+           :test-commands {"phantomjs"
+                           ["phantomjs" :runner "dev-resources/public/js/fb.js"]}}}
+ :advanced {:clean-targets ["out"]
+            :test-paths ["target/test/clj" "target/test/cljs"]
+            :plugins [[com.cemerick/clojurescript.test "0.2.1"]
+                      [com.keminglabs/cljx "0.3.0"]]
+            :cljx {:builds [{:source-paths ["test/cljx"]
+                             :output-path "target/test/clj"
+                             :rules :clj}
+                            {:source-paths ["test/cljx"]
+                             :output-path "target/test/cljs"
+                             :rules :cljs}]}
+            :cljsbuild
+            {:builds {:fb
+                      {:source-paths ["target/test/cljs"]
+                       :compiler
+                       {:optimizations :advanced}}}
+             :test-commands {"phantomjs-advanced"
+                             ["phantomjs" :runner "dev-resources/public/js/fb.js"]}}}}
