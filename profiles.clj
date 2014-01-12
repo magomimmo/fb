@@ -1,4 +1,4 @@
-{:dev {:clean-targets ["out"]
+{:dev {:clean-targets ["out" :target-path]
        :test-paths ["target/test/clj" "target/test/cljs"]
        :source-paths ["dev-resources/tools/http" "dev-resources/tools/repl"]
        :resources-paths ["dev-resources"]
@@ -26,7 +26,7 @@
                     (defn browser-repl []
                       (cemerick.austin.repls/cljs-repl (reset! cemerick.austin.repls/browser-repl-env
                                                                (cemerick.austin/repl-env))))]}
- :simple {:clean-targets ["out"]
+ :simple {:clean-targets ["out" :target-path]
           :test-paths ["target/test/clj" "target/test/cljs"]
           :plugins [[com.cemerick/clojurescript.test "0.2.1"]
                     [com.keminglabs/cljx "0.3.2"]]
@@ -43,7 +43,7 @@
                      {:optimizations :simple}}}
            :test-commands {"phantomjs"
                            ["phantomjs" :runner "dev-resources/public/js/fb.js"]}}}
- :advanced {:clean-targets ["out"]
+ :advanced {:clean-targets ["out" :target-path]
             :test-paths ["target/test/clj" "target/test/cljs"]
             :plugins [[com.cemerick/clojurescript.test "0.2.1"]
                       [com.keminglabs/cljx "0.3.2"]]
