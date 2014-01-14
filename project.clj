@@ -5,20 +5,21 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
   :min-lein-version "2.3.4"
-  :source-paths ["src/clj" "test/cljs"]
+  :source-paths ["target/src/clj" "target/src/cljs"]
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2138"]]
-  :plugins [[lein-cljsbuild "1.0.1"]]
+  :plugins [[lein-cljsbuild "1.0.1"]
+            [com.keminglabs/cljx "0.3.2"]]
   :hooks [leiningen.cljsbuild]
+  :cljx {:builds [{:source-paths ["src/cljx"]
+                   :output-path "target/src/clj"
+                   :rules :clj}
+                  {:source-paths ["src/cljx"]
+                   :output-path "target/src/cljs"
+                   :rules :cljs}]}
   :cljsbuild
-  {:crossovers [com.sinapsi.fb.controllers.pid
-                com.sinapsi.fb.controllers.advanced-pid
-                com.sinapsi.fb.controllers.deadband
-                com.sinapsi.fb.controllers.relay
-                com.sinapsi.fb.protocols]
-   :crossover-path "target/crossovers/cljs"
-   :builds {:fb
-            {:source-paths ["target/crossovers/cljs"]
+  {:builds {:fb
+            {:source-paths ["target/src/cljs"]
              :compiler
              {:output-to "dev-resources/public/js/fb.js"
               :optimizations :advanced

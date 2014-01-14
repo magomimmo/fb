@@ -1,11 +1,8 @@
 {:shared {:clean-targets ["out" :target-path]
           :test-paths ["target/test/clj" "target/test/cljs"]
           :resources-paths ["dev-resources"]
-          :dependencies [[lein-light-nrepl "0.0.10"]]
-          :plugins [[com.keminglabs/cljx "0.3.2"]
-                    [com.cemerick/clojurescript.test "0.2.1"]]
-          :cljx {:builds [{:incremental? true
-                           :source-paths ["test/cljx"]
+          :plugins [[com.cemerick/clojurescript.test "0.2.1"]]
+          :cljx {:builds [{:source-paths ["test/cljx"]
                            :output-path "target/test/clj"
                            :rules :clj}
                           {:source-paths ["test/cljx"]
