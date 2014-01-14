@@ -24,6 +24,6 @@
           (let [zone @(:zone this)]
             (if (> value zone)
               (- value zone)
-              (if (< value zone)
+              (if (< value (- zone))
                 (+ value zone)
                 0.0)))))
