@@ -20,7 +20,7 @@
     (are [expected actual] (= expected actual)
          {:g 0.0} (config (boiler))
          {:g 1.0} (config (boiler :g 1.0))))
-  (testing "(config (config! pid))"
+  (testing "(config (config! boiler))"
     (are [expected actual] (= expected actual)
          {:g 0.0} (config (config! (boiler)))
          {:g 1.0} (config (config! (boiler :g 1.0)))))
