@@ -26,4 +26,15 @@
                 (when g (reset! (get-in this [:consts :g]) g))
                 this))
   (start! [this value]
-          value))
+          (let [{:keys [m g k]} (:consts this)
+                {:keys [x v]} (:vars this)
+                a (/ (+ (- (* @k *@x))
+                        (- (* @g * @v))
+                        value)
+                     @m)
+                vel (+ (* *sample-time* a)
+                       v)
+                pos (* *sample-time* vel)]
+            (swap! this assoc-in [:vars :v] vel)
+            (swap! this assoc-in [:vars :x] pos
+            pos))))
